@@ -1,11 +1,15 @@
-import React, { useRef, useState } from "react";
+import React, { use, useRef, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
+import { AuthContext } from "../Context/AuthContext";
 
 const Login = () => {
   const emailRef = useRef();
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
+  const { signInUser, signWithGoogle, forgetUserPass } = use(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
   const handlePassToggle = () => {
     setShowPassword(!showPassword);
   };
@@ -16,15 +20,24 @@ const Login = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     setError("");
-
-    console.log(email, password);
+    signInUser(email, password)
+      .then(() => {
+        e.target.reset();
+        navigate(location?.state || "/");
+      })
+      .catch((error) => setError(error.message));
   };
 
-  const HandleForgetpass = (e) => {
-    e.preventDefault();
+  const HandleForgetPass = () => {
     const userEmail = emailRef.current.value;
-    // alert("Check Your Email :" + userEmail);
-    console.log(userEmail);
+    if (!userEmail) {
+      alert("Please Check Your Email");
+    }
+    forgetUserPass(userEmail)
+      .then(() => {
+        alert("Please Check your Email");
+      })
+      .catch((error) => console.log(error.message));
   };
   return (
     <>
@@ -58,7 +71,7 @@ const Login = () => {
                 </div>
               </div>
               <div>
-                <a onClick={HandleForgetpass} className="link link-hover">
+                <a onClick={HandleForgetPass} className="link link-hover">
                   Forgot password?
                 </a>
               </div>
@@ -67,6 +80,7 @@ const Login = () => {
               </button>
             </fieldset>
           </form>
+
           {error && <p className="text-xl text-red-500">{error}</p>}
           <p className="text-left">
             Already Have an Account ? Please{" "}

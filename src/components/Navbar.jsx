@@ -1,9 +1,20 @@
-import React from "react";
-import { Link, NavLink } from "react-router";
+import React, { use } from "react";
+import { Link, NavLink, useNavigate } from "react-router";
 import logo from "../assets/pet-care-logo.jpg";
+import { AuthContext } from "../Context/AuthContext";
 const Navbar = () => {
-  // const { user, signOutUser } = use(AuthContext);
+  const { user, signOutUser } = use(AuthContext);
+  // console.log(user);
 
+  const navigate = useNavigate();
+
+  const handleSignOutUser = () => {
+    signOutUser()
+      .then(() => {
+        navigate("/login");
+      })
+      .catch((error) => console.log(error.message));
+  };
   const links = (
     <>
       <li>
@@ -15,9 +26,6 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink to={"/profile"}>My Profile</NavLink>
-      </li>
-      <li>
-        <NavLink to={"/registration"}>Registration</NavLink>
       </li>
     </>
   );
@@ -66,14 +74,18 @@ const Navbar = () => {
             <ul className="menu menu-horizontal px-1">{links}</ul>
           </div>
           <div className="navbar-end">
-            <button>Logout</button>
-            {/* {user ? (
-            <a onClick={handleSignOutUser} className="btn">
-              Sign Out
-            </a>
-          ) : (
-            <a className="btn">Sign In</a>
-          )} */}
+            {user ? (
+              <>
+                <img src={user.photoURL} className="w-10 h-10" alt="" />
+                <a onClick={handleSignOutUser} className="btn">
+                  Sign Out
+                </a>
+              </>
+            ) : (
+              <Link to={"/login"} className="btn">
+                Sign In
+              </Link>
+            )}
           </div>
         </div>
       </div>

@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router";
+import { AuthContext } from "../Context/AuthContext";
+import LoadingPage from "../components/LoadingPage";
 
 const Registration = () => {
+  const { createUser, setUser, updateUser } = use(AuthContext);
   const navigate = useNavigate();
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
@@ -40,9 +43,21 @@ const Registration = () => {
       setError("You must agree to the Terms and Conditions!");
       return;
     }
-
-    console.log(name, photo, email, password, terms);
-    navigate("/", { replace: true });
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        updateUser({ displayName: name, photoURL: photo })
+          .then(() => {
+            setUser({ ...user, displayName: name, photoURL: photo });
+          })
+          .catch((error) => {
+            // console.log(error.message);
+            setUser(user);
+          });
+      })
+      .catch((error) => console.log(error));
+    // console.log(name, photo, email, password, terms);
+    navigate("/login", { replace: true });
   };
   return (
     <>

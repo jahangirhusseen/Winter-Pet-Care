@@ -8,6 +8,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../firebase/firebaseConfig";
 import { AuthContext } from "./AuthContext";
@@ -21,11 +22,12 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
+
   // verify - Email
   const verifyEmail = (user) => {
     return sendEmailVerification("Verification email sent!", user.email)
       .then(() => {
-        console.log(user.email);
+        // console.log(user.email);
       })
       .catch(() => {});
   };
@@ -41,6 +43,13 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
+
+  const updateUser = (updateData) => {
+    // console.log(updateData);
+
+    return updateProfile(auth.currentUser, updateData);
+  };
+
   // Sign-Out
   const signOutUser = () => {
     setLoading(true);
@@ -63,6 +72,7 @@ const AuthProvider = ({ children }) => {
   };
   const authInfo = {
     user,
+    setUser,
     loading,
     createUser,
     verifyEmail,
@@ -70,6 +80,7 @@ const AuthProvider = ({ children }) => {
     signWithGoogle,
     signOutUser,
     forgetUserPass,
+    updateUser,
   };
   return <AuthContext value={authInfo}>{children}</AuthContext>;
 };
