@@ -35,6 +35,7 @@ const Profile = () => {
             </div>
           </div>
           <h2>{user?.displayName}</h2>
+          <h2>{user?.email}</h2>
 
           <button
             onClick={handleFormModal}

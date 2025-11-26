@@ -41,9 +41,12 @@ const PopularSection = () => {
                       <div>Rating {data?.rating}</div>
                     </div>
                     <div className="card-actions justify-center mt-3 mb-5">
-                      <button className="btn btn-secondary hover:bg-white hover:text-secondary">
+                      <Link
+                        to={`/services/${data?.serviceId}`}
+                        className="btn btn-secondary hover:bg-white hover:text-secondary"
+                      >
                         View Details
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -51,7 +54,10 @@ const PopularSection = () => {
             ))}
         </div>
         <div className="mx-auto text-center my-10">
-          <Link to={"/services"} className="btn btn-secondary  hover:bg-white hover:text-secondary">
+          <Link
+            to={"/services"}
+            className="btn btn-secondary  hover:bg-white hover:text-secondary"
+          >
             View All Services
           </Link>
         </div>

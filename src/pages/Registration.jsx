@@ -49,6 +49,7 @@ const Registration = () => {
         updateUser({ displayName: name, photoURL: photo })
           .then(() => {
             setUser({ ...user, displayName: name, photoURL: photo });
+            navigate("/", { replace: true });
           })
           .catch((error) => {
             console.log(error.message);
@@ -57,7 +58,6 @@ const Registration = () => {
       })
       .catch((error) => console.log(error));
     // console.log(name, photo, email, password, terms);
-    navigate("/login", { replace: true });
   };
 
   const handleGoogleSignup = () => {

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router";
 
 const Services = () => {
   const [service, setService] = useState([]);
@@ -39,9 +40,12 @@ const Services = () => {
                       <div>Rating {data?.rating}</div>
                     </div>
                     <div className="card-actions justify-center mt-3 mb-5">
-                      <button className="btn btn-secondary hover:bg-white hover:text-secondary">
+                      <Link
+                        to={`/services/${data?.serviceId}`}
+                        className="btn btn-secondary hover:bg-white hover:text-secondary"
+                      >
                         View Details
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
