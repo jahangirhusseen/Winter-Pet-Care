@@ -2,12 +2,13 @@ import React, { use, useRef, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const emailRef = useRef();
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
-  const { signInUser, signWithGoogle, forgetUserPass } = use(AuthContext);
+  const { signInUser, signWithGoogle } = use(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
   const handlePassToggle = () => {
@@ -19,10 +20,14 @@ const Login = () => {
 
     const email = e.target.email.value;
     const password = e.target.password.value;
+    if (!email) {
+      toast.warning("Please provide your email to proceed");
+    }
     setError("");
     signInUser(email, password)
       .then(() => {
         e.target.reset();
+        toast.success(`🚀 Login Successful!`);
         navigate(location?.state || "/");
       })
       .catch((error) => setError(error.message));
@@ -32,19 +37,18 @@ const Login = () => {
       .then(() => {
         navigate(location?.state || "/");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        toast(`${error.message}`);
+      });
   };
 
   const HandleForgetPass = () => {
     const userEmail = emailRef.current.value;
     if (!userEmail) {
-      alert("Please Check Your Email");
+      toast.warning("Please provide your email to proceed");
+      return;
     }
-    forgetUserPass(userEmail)
-      .then(() => {
-        alert("Please Check your Email");
-      })
-      .catch((error) => console.log(error.message));
+    navigate(`/forget/${userEmail}`);
   };
   return (
     <>
@@ -67,7 +71,7 @@ const Login = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
-                  className="input "
+                  className="input"
                   placeholder="Password"
                 />
                 <div

@@ -1,11 +1,13 @@
 import React, { use, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { AuthContext } from "../Context/AuthContext";
 import LoadingPage from "../components/LoadingPage";
+import { toast } from "react-toastify";
 
 const Registration = () => {
   const { createUser, setUser, updateUser, signWithGoogle } = use(AuthContext);
+  const location = useLocation();
   const navigate = useNavigate();
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
@@ -52,12 +54,13 @@ const Registration = () => {
             navigate("/", { replace: true });
           })
           .catch((error) => {
-            console.log(error.message);
+            toast.warning(error.message);
             setUser(user);
           });
       })
-      .catch((error) => console.log(error));
-    // console.log(name, photo, email, password, terms);
+      .catch((error) => {
+        toast.warning(error.message);
+      });
   };
 
   const handleGoogleSignup = () => {
@@ -65,7 +68,7 @@ const Registration = () => {
       .then(() => {
         navigate(location?.state || "/");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => toast.warning(error.message));
   };
   return (
     <>

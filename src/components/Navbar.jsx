@@ -2,18 +2,21 @@ import React, { use } from "react";
 import { Link, NavLink, useNavigate } from "react-router";
 import logo from "../assets/pet-care-logo.jpg";
 import { AuthContext } from "../Context/AuthContext";
+import { toast } from "react-toastify";
 const Navbar = () => {
   const { user, signOutUser } = use(AuthContext);
-  // console.log(user);
 
   const navigate = useNavigate();
 
   const handleSignOutUser = () => {
     signOutUser()
       .then(() => {
+        toast.success("Logged out successfully");
         navigate("/login");
       })
-      .catch((error) => console.log(error.message));
+      .catch((error) => {
+        toast.warning(error.message);
+      });
   };
   const links = (
     <>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
+import { toast } from "react-toastify";
 
 const PopularSection = () => {
   const [service, setService] = useState([]);
@@ -8,7 +9,9 @@ const PopularSection = () => {
     fetch("./services.json")
       .then((res) => res.json())
       .then((data) => setService(data))
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        toast.warning(error.message);
+      });
   }, []);
 
   return (

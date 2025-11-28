@@ -6,6 +6,7 @@ import LoadingPage from "../components/LoadingPage";
 const PrivateRoute = ({ children }) => {
   const { user, loading } = use(AuthContext);
   const location = useLocation();
+
   if (loading) {
     return <LoadingPage />;
   }

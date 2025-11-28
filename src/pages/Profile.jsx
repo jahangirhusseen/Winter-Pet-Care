@@ -1,5 +1,6 @@
 import React, { use, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
+import { toast } from "react-toastify";
 
 const Profile = () => {
   const { user, updateUser, setUser } = use(AuthContext);
@@ -18,9 +19,10 @@ const Profile = () => {
       .then(() => {
         setUser({ ...user, displayName: name, photoURL: photo });
         setIsOpen(!isOpen);
+        toast.success("User Data Update Successfully");
       })
       .catch((error) => {
-        console.log(error.message);
+        toast.warning(error.message);
         setUser(user);
       });
   };

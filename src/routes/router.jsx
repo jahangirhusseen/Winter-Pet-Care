@@ -8,6 +8,8 @@ import Login from "../pages/Login";
 import Profile from "../pages/Profile";
 import PrivateRoute from "./PrivateRoute";
 import ServiceDetails from "../pages/ServiceDetails";
+import ForgetPassword from "../pages/ForgetPassword";
+import ErrorPage from "../pages/ErrorPage";
 
 export const router = createBrowserRouter([
   {
@@ -47,8 +49,12 @@ export const router = createBrowserRouter([
         element: <Login />,
       },
       {
+        path: "/forget/:userEmail",
+        element: <ForgetPassword />,
+      },
+      {
         path: "/*",
-        element: <h2>404</h2>,
+        element: <ErrorPage />,
       },
     ],
   },
