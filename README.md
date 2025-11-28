@@ -1,16 +1,47 @@
-# React + Vite
+# 📱 My React Web Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Live Link:** [https://winter-pet-care-db5b6.web.app/]
 
-Currently, two official plugins are available:
+A fully responsive, interactive, and dynamic React web application with modern UI, routing, authentication, and service management features.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Overview
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This project is a React-based single-page application (SPA) built with Tailwind CSS, DaisyUI, React Router, Firebase, and other modern tools.  
+It includes authentication, dynamic service listings, detailed service pages, and a smooth user experience with Toast notifications and animations.
 
-## Expanding the ESLint configuration
+All routes are fully responsive and optimized for deployment on Netlify, Vercel, or Cloudflare.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🌟 Features
+
+✅ Responsive Layout – Works across all screen sizes (mobile, tablet, desktop).  
+✅ Firebase Authentication – User registration, login, and password reset.  
+✅ Protected Routes – Some pages accessible only to logged-in users.  
+✅ Dynamic Service Data – View service details based on dynamic route params.  
+✅ Toast Notifications – Alerts for login, logout, and actions using React Toastify.  
+✅ Smooth Animations – Interactive UI with Framer Motion.  
+✅ Error Handling – Custom 404 page for invalid routes.  
+✅ LocalStorage / State Management – Persistent data handling.
+
+---
+
+## 🧱 Tech Stack
+
+| Technology         | Description                         |
+| ------------------ | ----------------------------------- |
+| React.js           | Frontend framework for building UI  |
+| React Router v7    | Client-side routing and navigation  |
+| Tailwind CSS v4    | Utility-first CSS framework         |
+| DaisyUI            | Tailwind component library          |
+| Firebase v12       | Authentication and backend services |
+| React Toastify v11 | Toast notifications                 |
+| Framer Motion v12  | Animations for UI                   |
+| Swiper v12         | Slider / carousel components        |
+| React Icons v5     | Icon library                        |
+| LocalStorage API   | Persistent data storage             |
+| Vite               | Build tool and dev server           |
+
+---
