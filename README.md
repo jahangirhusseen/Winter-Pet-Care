@@ -24,7 +24,7 @@ All routes are fully responsive and optimized for deployment on Netlify, Vercel,
 ✅ Toast Notifications – Alerts for login, logout, and actions using React Toastify.  
 ✅ Smooth Animations – Interactive UI with Framer Motion.  
 ✅ Error Handling – Custom 404 page for invalid routes.  
-✅ LocalStorage / State Management – Persistent data handling.
+✅ State Management – Persistent data handling.
 
 ---
 
